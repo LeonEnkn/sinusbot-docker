@@ -8,27 +8,12 @@ ENV SINUS_USER="sinusbot" \
     YTDL_BIN="/usr/local/bin/youtube-dl" \
     TS3_DIR="$SINUS_DIR/TeamSpeak3-Client-linux_amd64" \
     SINUS_VERSION="0.9.8" \ 
-    YTDL_VERSION="latest" \
-    TS3_VERSION="3.0.17" \
-    TS3_OFFSET="49134"
+    YTDL_VERSION="latest"
 
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod 755 /entrypoint.sh && \
-    apt-get update -q && \
-    apt-get install -yq \
-    locales \
-    wget \
-    sudo \
-    x11vnc \
-    xinit \
-    xvfb \
-    libxcursor1 \
-    libglib2.0-0 \
-    python \
-    bzip2 \
-    sqlite3 \
-    ca-certificates && \
-    update-ca-certificates && \
+    apt-get update -q && apt-get install -yq locales wget sudo x11vnc xinit xvfb libxcursor1 libglib2.0-0 pythonbzip2 sqlite3 \
+    ca-certificates && update-ca-certificates && \	
     wget -qO "$YTDL_BIN" "https://yt-dl.org/downloads/$YTDL_VERSION/youtube-dl" && \
     chmod a+rx "$YTDL_BIN" && \
     locale-gen --purge en_US.UTF-8 && \
